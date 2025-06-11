@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="person_menu_root"
+              name="Persons"
+              parent="website.menu_website_configuration"
+              sequence="10"/>
+</odoo>
