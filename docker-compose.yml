@@ -1,30 +1,37 @@
+# Docker Compose configuration for Odoo 16 + PostgreSQL
+# Provides a complete environment to run and develop Odoo modules locally.
+
 version: "3.1"
+
 services:
+  # Odoo web application
   web:
-    image: odoo:16.0
+    image: odoo:16.0  # Official Odoo 16 image
     depends_on:
-      - db
+      - db  # Wait for PostgreSQL before starting
     ports:
-      - "8069:8069"
+      - "8069:8069"  # Expose Odoo on localhost:8069
     volumes:
-      - ./addons:/mnt/extra-addons
-      - odoo-web-data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons  # Mount custom addons
+      - odoo-web-data:/var/lib/odoo  # Persistent Odoo data
     environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo
+      - HOST=db           # PostgreSQL host
+      - USER=odoo         # PostgreSQL user
+      - PASSWORD=odoo     # PostgreSQL password
     restart: always
 
+  # PostgreSQL database service
   db:
-    image: postgres:13
+    image: postgres:13  # Stable PostgreSQL version compatible with Odoo 16
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data
+      - odoo-db-data:/var/lib/postgresql/data  # Persistent database storage
     restart: always
 
+# Named volumes for persistent data
 volumes:
   odoo-web-data:
   odoo-db-data:

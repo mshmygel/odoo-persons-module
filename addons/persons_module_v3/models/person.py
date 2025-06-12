@@ -39,13 +39,13 @@ class Person(models.Model):
 
     @api.depends("first_name", "last_name")
     def _compute_full_name(self):
-        """Concatenate first name and last name to form the full name."""
+        # Concatenate first name and last name to form the full name.
         for rec in self:
             rec.full_name = f"{rec.first_name or ''} {rec.last_name or ''}".strip()
 
     @api.depends("birthday")
     def _compute_age(self):
-        """Calculate age from birth date."""
+        # Calculate age from birth date.
         for rec in self:
             if rec.birthday:
                 today = date.today()
@@ -62,7 +62,7 @@ class Person(models.Model):
 
     @api.constrains("birthday")
     def _check_birthday(self):
-        """Ensure that birth date is not in the future."""
+        # Ensure that birth date is not in the future.
         for rec in self:
             if rec.birthday and rec.birthday > date.today():
                 raise ValidationError(_("Birth date cannot be in the future!"))

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <!--
+        Tree view for listing person records in a tabular format.
+        Displays first name, last name, full name, age, sex, and company.
+    -->
     <record id="view_person_tree" model="ir.ui.view">
         <field name="name">person.tree</field>
         <field name="model">persons.person</field>
@@ -15,6 +19,10 @@
         </field>
     </record>
 
+    <!--
+        Form view for creating and editing person records.
+        Computed fields (full_name, age) are readonly.
+    -->
     <record id="view_person_form" model="ir.ui.view">
         <field name="name">person.form</field>
         <field name="model">persons.person</field>
