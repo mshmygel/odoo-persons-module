@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="person_template" name="Persons List Page">
+    <t t-call="website.layout">
+      <div class="container py-5">
+        <!-- Section Header -->
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Our Team</h1>
+            <p class="lead text-muted">Meet our awesome people</p>
+          </div>
+        </div>
+
+        <!-- Persons Grid -->
+        <div class="row g-4">
+          <t t-foreach="persons" t-as="person">
+            <div class="col-lg-4 col-md-6">
+              <div class="card h-100 shadow-sm border-0 rounded-3">
+                <div class="card-body p-4">
+                  <!-- Avatar and Name Section -->
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="avatar-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                      <span class="fw-bold">
+                        <t t-esc="person.first_name[0] if person.first_name else '?'"/>
+                        <t t-esc="person.last_name[0] if person.last_name else ''"/>
+                      </span>
+                    </div>
+                    <div>
+                      <h5 class="card-title mb-1 fw-bold">
+                        <t t-esc="person.full_name"/>
+                      </h5>
+                      <small class="text-muted">
+                        <t t-esc="person.company_id.name"/>
+                      </small>
+                    </div>
+                  </div>
+
+                  <!-- Additional Person Details -->
+                  <div class="person-details">
+                    <div class="row g-2">
+                      <div class="col-6">
+                        <small class="text-muted d-block">Gender:</small>
+                        <span class="badge bg-light text-dark">
+                          <t t-esc="dict(person._fields['sex'].selection).get(person.sex, '-') if person.sex else '-'"/>
+                        </span>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">Age:</small>
+                        <span class="fw-semibold">
+                          <t t-esc="person.age"/> years
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </div>
+
+        <!-- No Records Fallback -->
+        <t t-if="not persons">
+          <div class="text-center py-5">
+            <div class="mb-4">
+              <i class="fa fa-users fa-3x text-muted"></i>
+            </div>
+            <h3 class="text-muted">No persons found</h3>
+            <p class="text-muted">Please add persons via the admin panel</p>
+          </div>
+        </t>
+      </div>
+    </t>
+  </template>
+</odoo>

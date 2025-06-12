@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Backend Action to open Persons list -->
+    <record id="action_person_list" model="ir.actions.act_window">
+        <field name="name">Persons</field>
+        <field name="res_model">persons.person</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Frontend menu (Website configuration section) -->
+    <menuitem id="person_menu_website"
+              name="Persons"
+              parent="website.menu_website_configuration"
+              action="action_person_list"
+              sequence="10"/>
+
+    <!-- Backend menu root under Administration -->
+    <menuitem id="person_menu_backend_root"
+              name="Persons"
+              parent="base.menu_administration"
+              sequence="10"/>
+
+    <!-- Backend submenu -->
+    <menuitem id="person_menu_backend_list"
+              name="All Persons"
+              parent="person_menu_backend_root"
+              action="action_person_list"
+              sequence="20"/>
+</odoo>
