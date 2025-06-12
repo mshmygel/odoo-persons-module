@@ -8,6 +8,7 @@ class Person(models.Model):
     Model for storing personal information of individuals,
     including name, birthday, gender, company, and age.
     """
+
     _name = "persons.person"
     _description = "Person"
     _order = "create_date desc"
@@ -15,19 +16,24 @@ class Person(models.Model):
 
     first_name = fields.Char(string="First Name", required=True, size=50)
     last_name = fields.Char(string="Last Name", required=True, size=50)
-    full_name = fields.Char(string="Full Name", compute="_compute_full_name", store=True)
+    full_name = fields.Char(
+        string="Full Name", compute="_compute_full_name", store=True
+    )
     birthday = fields.Date(string="Birth Date")
     age = fields.Integer(string="Age", compute="_compute_age", store=True)
-    sex = fields.Selection([
-        ("male", "Male"),
-        ("female", "Female"),
-        ("non-binary", "Non-binary"),
-    ], string="Gender")
+    sex = fields.Selection(
+        [
+            ("male", "Male"),
+            ("female", "Female"),
+            ("non-binary", "Non-binary"),
+        ],
+        string="Gender",
+    )
     company_id = fields.Many2one(
         "res.company",
         string="Company",
         required=True,
-        default=lambda self: self.env.company
+        default=lambda self: self.env.company,
     )
     active = fields.Boolean(default=True)
 
@@ -44,8 +50,12 @@ class Person(models.Model):
             if rec.birthday:
                 today = date.today()
                 rec.age = (
-                    today.year - rec.birthday.year
-                    - ((today.month, today.day) < (rec.birthday.month, rec.birthday.day))
+                    today.year
+                    - rec.birthday.year
+                    - (
+                        (today.month, today.day)
+                        < (rec.birthday.month, rec.birthday.day)
+                    )
                 )
             else:
                 rec.age = 0
