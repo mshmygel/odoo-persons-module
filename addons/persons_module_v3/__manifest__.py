@@ -8,8 +8,9 @@
     "license": "LGPL-3",
     "depends": ["base", "website"],
     "data": [
+        "views/person_view.xml",
         "views/menu.xml",
-        "views/person_view.xml"
+        "templates/person_template.xml",
     ],
     "assets": {},
     "installable": True,
