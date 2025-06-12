@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="person_template" name="Persons List Page">
+    <t t-call="website.layout">
+      <div class="container">
+        <h1>Latest Persons</h1>
+        <div class="row">
+          <t t-foreach="persons" t-as="person">
+            <div class="col-md-4 card mb-3 p-3">
+              <h4><t t-esc="person.full_name" /></h4>
+              <p><strong>Sex:</strong> <t t-esc="person.sex or '—'" /></p>
+              <p><strong>Age:</strong> <t t-esc="person.age" /></p>
+              <p><strong>Company:</strong> <t t-esc="person.company_id.name" /></p>
+            </div>
+          </t>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>
