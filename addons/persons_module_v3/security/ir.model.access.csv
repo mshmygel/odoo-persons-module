@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_persons_person_user,persons.person.user,model_persons_person,base.group_user,1,1,1,1
+access_persons_person_public,persons.person.public,model_persons_person,,1,0,0,0
+access_persons_person_manager,persons.person.manager,model_persons_person,base.group_system,1,1,1,1
