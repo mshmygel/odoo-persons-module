@@ -8,6 +8,7 @@
     "license": "LGPL-3",
     "depends": ["base", "website"],
     "data": [
+        "security/ir.model.access.csv",
         "views/person_view.xml",
         "views/menu.xml",
         "templates/person_template.xml",
