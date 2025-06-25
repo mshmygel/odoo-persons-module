@@ -12,6 +12,7 @@
         "views/person_view.xml",
         "views/menu.xml",
         "templates/person_template.xml",
+        "templates/person_form_template.xml"
     ],
     "assets": {},
     "installable": True,
