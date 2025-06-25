@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="person_form_template" name="Person Create Form">
+    <t t-call="website.layout">
+      <div class="container py-5">
+        <h1 class="display-5 mb-4">Add New Person</h1>
+
+        <form action="/persons/create" method="post">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+          <!-- First Name -->
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" name="first_name" required="required"/>
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" name="last_name" required="required"/>
+          </div>
+
+          <!-- Birthday -->
+          <div class="mb-3">
+            <label class="form-label">Birthday</label>
+            <input type="date" class="form-control" name="birthday"/>
+          </div>
+
+          <!-- Gender -->
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" name="sex">
+              <option value="">—</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-binary</option>
+            </select>
+          </div>
+
+          <!-- Existing Company -->
+          <div class="mb-3">
+            <label class="form-label">Choose Existing Company</label>
+            <select class="form-select" name="company_id">
+              <option value="">—</option>
+              <t t-foreach="companies" t-as="company">
+                <option t-att-value="company.id">
+                  <t t-esc="company.name"/>
+                </option>
+              </t>
+            </select>
+          </div>
+
+          <!-- Or Add New Company -->
+          <div class="mb-3">
+            <label class="form-label">Or Add New Company</label>
+            <input type="text" class="form-control" name="new_company"/>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </t>
+  </template>
+</odoo>
